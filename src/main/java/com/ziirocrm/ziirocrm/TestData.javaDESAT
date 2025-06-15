@@ -1,0 +1,22 @@
+package com.ziirocrm.ziirocrm;
+
+import com.ziirocrm.ziirocrm.model.User;
+import com.ziirocrm.ziirocrm.repository.UserRepository;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class TestData {
+
+    @Bean
+    CommandLineRunner init(UserRepository userRepository) {
+        return args -> {
+            if (userRepository.count() == 0) {
+                User user = User.createSampleUser();
+                userRepository.save(user);
+                System.out.println("Usuário salvo com sucesso!");
+            }
+        };
+    }
+}
