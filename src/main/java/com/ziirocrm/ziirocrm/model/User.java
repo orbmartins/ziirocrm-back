@@ -61,7 +61,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email; // Corrija aqui!
     }
 
     @Override
@@ -82,17 +82,5 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    // getPassword() já está presente
-
-    // Dados de exemplo
-    public static User createSampleUser() {
-        User user = new User();
-        user.setName("Rodrigo");
-        user.setUsername("rodrigo.ziiro");
-        user.setEmail("rodrigo@ziiro.com");
-        user.setPassword("123456");
-        return user;
     }
 }

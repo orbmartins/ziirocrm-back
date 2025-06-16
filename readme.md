@@ -64,20 +64,26 @@ test/
 
 ## Configuração
 
-- **Banco de Dados:**  
-  Configurado para PostgreSQL em `application.properties`.
-- **Porta padrão:**  
-  8080
+- **Banco de Dados:** Configurado para PostgreSQL em `application.properties`.
+- **Porta padrão:** 8080
+
+---
+
+## Requisitos
+
+- Java/Java Development Kit (JDK)
+- Docker
+- Postman ou equivalente
 
 ---
 
 ## Como Usar
 
-1. **Inicie o banco PostgreSQL** e ajuste as credenciais em `application.properties` se necessário.
-2. **Execute a aplicação** com `mvn spring-boot:run` ou pela IDE.
-3. **Registre um usuário** via `POST /auth/register`.
-4. **Faça login** via `POST /auth/login` para obter o token JWT.
-5. **Acesse os endpoints protegidos** (`/api/users`) usando o token JWT no header `Authorization: Bearer <token>`.
+1. **Inicie o container do BD PostgreSQL no Docker** com o comando "docker-compose up -d".
+1. **Execute a aplicação** com `mvn spring-boot:run` ou pela IDE.
+1. **Registre um usuário** via `POST /auth/register`.
+1. **Faça login** via `POST /auth/login` para obter o token JWT.
+1. **Acesse os endpoints protegidos** (`/api/users`) usando o token JWT no header `Authorization: Bearer <token>`.
 
 ---
 
@@ -86,3 +92,11 @@ test/
 - O campo `username` é usado como identificador principal para autenticação.
 - O projeto não implementa roles/perfis de usuário por padrão.
 - O endpoint `/auth/register` é público, os demais exigem autenticação JWT.
+
+---
+
+## Acessar o banco via wsl
+
+- psql -h localhost -p 5432 -U ziirocrm -d ziirocrm
+
+
