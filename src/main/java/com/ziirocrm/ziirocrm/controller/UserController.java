@@ -4,6 +4,7 @@ import com.ziirocrm.ziirocrm.model.User;
 import com.ziirocrm.ziirocrm.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.Map;
@@ -14,9 +15,11 @@ import java.util.Optional;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // Listar todos usuários
@@ -51,7 +54,10 @@ public class UserController {
         User user = optionalUser.get();
         user.setName(userDetails.getName());
         user.setEmail(userDetails.getEmail());
-        user.setPassword(userDetails.getPassword());
+
+        if (userDetails.getPassword() != null && !userDetails.getPassword().isBlank()) {
+            user.setPassword(passwordEncoder.encode(userDetails.getPassword()));
+        }
 
         User updatedUser = userRepository.save(user);
         return ResponseEntity.ok(updatedUser);
@@ -71,10 +77,7 @@ public class UserController {
             switch (key) {
                 case "name" -> user.setName((String) value);
                 case "email" -> user.setEmail((String) value);
-                case "password" -> user.setPassword((String) value);
-                default -> {
-                    // Ignore unknown fields or handle as needed
-                }
+                case "password" -> user.setPassword(passwordEncoder.encode((String) value));
             }
         });
 
