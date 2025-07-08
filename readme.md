@@ -48,6 +48,18 @@ test/
 - **CRUD de Usuários:**  
   Endpoints para listar, buscar, criar, atualizar e deletar usuários.
 
+- **CRUD de Oportunidades:**  
+  Endpoints para listar, buscar, criar, atualizar e deletar oportunidades em `/api/oportunidades`.
+
+- **CRUD de Atendimentos:**  
+  Endpoints para listar, adicionar e remover atendimentos vinculados a uma oportunidade em `/api/oportunidades/{oportunidadeId}/atendimentos`.
+
+- **Carga automática de dados de teste:**  
+  Ao iniciar a aplicação, são criadas oportunidades e atendimentos de exemplo automaticamente para facilitar testes e desenvolvimento.
+
+- **CORS configurado para frontend Angular:**  
+  Permite requisições do endereço `http://localhost:4200` para integração com o frontend.
+
 ---
 
 ## Principais Arquivos
